@@ -1,12 +1,66 @@
-var uppercase = ["A", "B", "C", "D", "E", "F",'G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',];
+var uppercase = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
 
-var lowercase = ['a','b','c','d','e','f','g','h','i','j','k','l','m','o','p','q','r','s','t','u','v','w','x','y','z']
+var lowercase = [
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
+  "g",
+  "h",
+  "i",
+  "j",
+  "k",
+  "l",
+  "m",
+  "o",
+  "p",
+  "q",
+  "r",
+  "s",
+  "t",
+  "u",
+  "v",
+  "w",
+  "x",
+  "y",
+  "z",
+];
 
-var numbers = ['1','2','3','4','5','6','7','8','9','0']
+var numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 
-var special = ['!','@','#','$','%','^','&','*']
+var special = ["!", "@", "#", "$", "%", "^", "&", "*"];
 
 function getPasswordOpts() {
+  var counter = 0;
   var length = parseInt(prompt("How many characters would you like?"));
   if (isNaN(length)) {
     alert("Must be a valid Number");
@@ -28,6 +82,7 @@ function getPasswordOpts() {
     alert("must select one character type");
     return;
   }
+
   var passwordOptions = {
     length: length,
     hasUppercase: hasUppercase,
@@ -38,15 +93,53 @@ function getPasswordOpts() {
   return passwordOptions;
 }
 function generatePassword() {
-let complexity = document.getElementById(passwordOptions).value;
-let password = "";
-for (let i = 0; i <= passwordOptions.length; i++) 
-  password = password + value.charAt(Math.floor(Math.random() * Math.floor;(value.length -1)));
-  document.getElementsByid(passwordOptions).value = password
+  var options = getPasswordOpts();
+  var rndType;
+  var rndIdx;
+  var key;
+  var passw = "";
+  var passwLength = 0;
+
+  while (passwLength < options.length) {
+    rndType = Math.floor(Math.random() * options.counter);
+
+    if (options.hasUppercase || options.hasLowercase) {
+      // Generate a random number between 0 and 25
+      rndIdx = Math.floor(Math.random() * 26);
+
+      if (options.hasUppercase && passwLength < options.length) {
+        key = uppercase[rndIdx];
+        // Push key to the password
+        passw = passw + key;
+        passwLength++;
+      }
+
+      if (options.hasLowercase && passwLength < options.length) {
+        key = lowercase[rndIdx];
+        // Push key to the password
+        passw = passw + key;
+        passwLength++;
+      }
+    }
+
+    if (options.hasNumbers && passwLength < options.length) {
+      rndIdx = Math.floor(Math.random() * 10);
+      key = numbers[rndIdx];
+      // Push key to the password
+      passw = passw + key;
+      passwLength++;
+    }
+    if (options.hasSpecial && passwLength < options.length) {
+      rndIdx = Math.floor(Math.random() * 8);
+      key = special[rndIdx];
+      // Push key to the password
+      passw = passw + key;
+      passwLength++;
+    }
+  }
+
+  return passw;
 }
-
-
-
 
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
